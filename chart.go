@@ -1,6 +1,8 @@
 package termui
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // only 16 possible combinations, why bother
 var braillePatterns = map[[2]int]rune{
@@ -216,13 +218,9 @@ func (lc *LineChart) calcLayout() {
 
 	span := lc.maxY - lc.minY
 
-	if lc.minY < lc.bottomValue {
-		lc.bottomValue = lc.minY - 0.2*span
-	}
+	lc.bottomValue = lc.minY - 0.2*span
 
-	if lc.maxY > lc.topValue {
-		lc.topValue = lc.maxY + 0.2*span
-	}
+	lc.topValue = lc.maxY + 0.2*span
 
 	lc.axisYHeight = lc.innerHeight - 2
 	lc.calcLabelY()
@@ -295,6 +293,7 @@ func (lc *LineChart) plotAxes() []Point {
 }
 
 func (lc *LineChart) Buffer() []Point {
+
 	ps := lc.Block.Buffer()
 	if lc.Data == nil || len(lc.Data) == 0 {
 		return ps
